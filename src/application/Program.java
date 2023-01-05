@@ -1,69 +1,77 @@
 package application;
 
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
-import Service.ServiceSeller;
-import model.entities.Department;
-import model.entities.Seller;
+import Service.ServiceDespesa;
+import model.entities.Categoria;
+import model.entities.Despesa;
 
 public class Program {
 
-	public static void main(String[] args) {
-		
-	
+	public static void main(String[] args) {	
 	    //Chamar o Servico
-	    ServiceSeller serviceSeller = new ServiceSeller();	
+	    ServiceDespesa serviceDespesa = new ServiceDespesa();	
 	    //Retorno Seller
-	    Seller seller = null;
+	    Despesa despesa = null;
 	    //Retorno lista Seller
-	    List<Seller> lista = null;
+	    List<Despesa> lista = new ArrayList<>();        
 	    
 	    
-	    
-	    //Teste update banco ok
-//		seller = serviceSeller.buscarSellerPorID(2);
-//		imprimirSeller(seller);
-//		seller.setName("Carlos");
-//		serviceSeller.substituirNomePorId(seller);	
-//		seller = serviceSeller.buscarSellerPorID(2);
-//		imprimirSeller(seller);
+	    System.out.println("Busca seller por ID");
+		despesa = serviceDespesa.buscarSellerPorID(2);		
+		imprimirSeller(despesa);
 		
-		lista = serviceSeller.buscaTodos();
-		imprimirListaSeller(lista);
-        
-        
-//        Department department = new Department();
-//        department.setId(1);
-//		lista = serviceSeller.buscarSellersPorIdDepartamento(department);
-//		imprimirListaSeller(lista);
-//		
-//		serviceSeller.deletaPorId(4);
-//		
-//		serviceSeller.insererComNovoId( 
-//				new Seller(null, "Victor", "victor@victor.com", new Date(), 4000.00, department));
+		
+		System.out.println("Busca todos: ");
+		lista = serviceDespesa.buscaTodos();		    
+		imprimirListaSeller(lista);		
+		
+		System.out.println("Adiciona : ");		
+	
+		serviceDespesa.insererComNovoId(
+			new Despesa(null, "Mario", Calendar.getInstance().getTime(), 100D, new Categoria(2, "")));
+		System.out.println("deletaPorId : ");		
+		serviceDespesa.deletaPorId(3);
+		
+		System.out.println("buscarSellerPorID : ");
+		despesa = serviceDespesa.buscarSellerPorID(2);
+	
+		System.out.println("Substitui: ");
+		despesa.setDescricao("Carlos");
+		serviceDespesa.substituirNomePorId(despesa);	
+		
+		lista = new ArrayList<>();    	
+        System.out.println("Buscar seller por departamento: ");
+        Categoria department = new Categoria(2, null);
+        lista = serviceDespesa.buscarSellerPorDepartamento(department);
+	    imprimirListaSeller(lista);	
+       
+		
+		
+		
 	}
 	
-	private static void imprimirListaSeller(List<Seller> lista) {
-		for (Seller seller : lista) {
-			System.out.println(seller.getEmail());
-			System.out.println(seller.getName());
-			System.out.println(seller.getId());
-			System.out.println(seller.getBaseSalary());
-			System.out.println(seller.getBrithDate());
-			System.out.println(seller.getDepartment().getName());
+	private static void imprimirListaSeller(List<Despesa> lista) {
+		for (Despesa despesa : lista) {
+//			System.out.println(seller.getDescricao());
+//			System.out.println(seller.getId());
+//			System.out.println(seller.getValor());
+//			System.out.println(seller.getDepartment());	
+			imprimirSeller(despesa);
 		}
 	}
 	
-	private static void imprimirSeller(Seller seller) {
-		System.out.println("-------------------------------------------------------");
+	private static void imprimirSeller(Despesa despesa) {
+		System.out.println("-------------------------------------------------------");		
 		
-		System.out.println(seller.getEmail());
-		System.out.println(seller.getName());
-		System.out.println(seller.getId());
-		System.out.println(seller.getBaseSalary());
-		System.out.println(seller.getBrithDate());
-		System.out.println(seller.getDepartment().getName());
+		System.out.println(despesa.getId());
+		System.out.println(despesa.getData());
+		System.out.println(despesa.getValor());		
+		System.out.println(despesa.getDescricao());			
+		System.out.println(despesa.getDepartment().toString());
+		
 		
 		System.out.println("-------------------------------------------------------");
 	}

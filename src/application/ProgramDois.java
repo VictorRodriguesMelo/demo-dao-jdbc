@@ -1,16 +1,15 @@
 package application;
 
-import Service.ServiceDepartment;
+import Service.ServiceCategoria;
 
 public class ProgramDois {
 
 	public static void main(String[] args) {		
+		ServiceCategoria.buscaTodos();
+		ServiceCategoria.inserirDados();		
+		ServiceCategoria.deletaPorId();	
 		
-		ServiceDepartment.inserirDados();		
 		
-		ServiceDepartment.buscaTodos();
-			
-		ServiceDepartment.deletaPorId();	
 		
 	}
 

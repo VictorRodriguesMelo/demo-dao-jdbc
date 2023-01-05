@@ -1,17 +1,16 @@
 package model.dao;
 
 import db.DB;
-import model.dao.Impl.DepartmentDaoJDBC;
-import model.dao.Impl.SellerDaoJDBC;
+import model.dao.Impl.CategoriaDaoJDBC;
+import model.dao.Impl.DespesaDaoJDBC;
 
 public class DaoFactory { 
 	
-	public static SellerDao createSellerDao() {
-		return new SellerDaoJDBC(DB.getConnection());
-	}
-	
-	public static DepartmentDao createDepartamentDao() {
-		return new DepartmentDaoJDBC(DB.getConnection());
+	public static DespesaDao createSellerDao() {
+		return new DespesaDaoJDBC(DB.getConnection());
+	}	
+	public static CategoriaDao createDepartamentDao() {
+		return new CategoriaDaoJDBC(DB.getConnection());
 	}
 
 
